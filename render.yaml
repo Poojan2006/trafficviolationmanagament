@@ -30,7 +30,6 @@ services:
     dockerContext: ./traffic-frontend
     dockerfile: Dockerfile
     plan: free
-    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         fromService:
