@@ -32,7 +32,4 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: ALLOWED_ORIGINS
-        fromService:
-          type: web
-          name: traffic-frontend
-          property: url
+        value: "*" # Placeholder to break circular dependency. Update this in Render dash later.
