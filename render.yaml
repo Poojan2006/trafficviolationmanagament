@@ -1,18 +1,4 @@
 services:
-  # Frontend Service
-  - type: web
-    name: traffic-frontend
-    env: docker
-    dockerContext: traffic-frontend
-    dockerfile: Dockerfile
-    plan: free
-    envVars:
-      - key: VITE_API_URL
-        fromService:
-          type: web
-          name: traffic-backend
-          property: url
-
   # Backend Service
   - type: web
     name: traffic-backend
@@ -32,4 +18,4 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: ALLOWED_ORIGINS
-        value: "*" # Placeholder to break circular dependency. Update this in Render dash later.
+        value: "*" # Update this in Render dashboard to match your Vercel URL (e.g., https://your-app.vercel.app)

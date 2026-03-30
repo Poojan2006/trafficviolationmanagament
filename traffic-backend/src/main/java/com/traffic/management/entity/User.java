@@ -35,6 +35,5 @@ public class User {
     private Integer points = 0;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 }

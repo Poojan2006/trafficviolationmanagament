@@ -8,10 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
- * Seeds a default admin + police account on every startup.
- * Credentials:
- *   Admin  → email: admin@trivo.com   / password: admin123
- *   Police → email: police@trivo.com  / password: police123
+ * Seeds default test accounts on every startup (H2 / fresh DB only).
+ *
+ *  Role      | Email                  | Password
+ * -----------|------------------------|-------------
+ *  ADMIN     | admin@trivo.com        | Admin@123
+ *  POLICE    | police@trivo.com       | Police@123
+ *  CIVILIAN  | civilian@trivo.com     | Civilian@123
  */
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -26,8 +29,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        seedUser("Admin",  "admin@trivo.com",  "admin123",  Role.ADMIN);
-        seedUser("Officer Raj", "police@trivo.com", "police123", Role.POLICE);
+        seedUser("Admin",        "admin@trivo.com",    "Admin@123",    Role.ADMIN);
+        seedUser("Officer Raj",  "police@trivo.com",   "Police@123",   Role.POLICE);
+        seedUser("Civilian",     "civilian@trivo.com", "Civilian@123", Role.USER);
     }
 
     private void seedUser(String name, String email, String rawPassword, Role role) {
@@ -38,7 +42,7 @@ public class DataInitializer implements CommandLineRunner {
             user.setPassword(passwordEncoder.encode(rawPassword));
             user.setRole(role);
             userRepository.save(user);
-            System.out.println("✅ Seeded " + role + " account: " + email);
+            System.out.println("✅ Seeded [" + role + "] " + email);
         }
     }
 }

@@ -18,7 +18,6 @@ public class Violation {
     private Long id;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
     @Column(columnDefinition = "TEXT")
